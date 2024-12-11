@@ -3,7 +3,7 @@ import { createClient } from "@/utils/supabase/supabaseClient-server";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import SignOutButton from "@/app/(authenticated)/home/signout-button";
-import { getToken } from "@kdnk.dev/f8n-utils";
+import { getToken } from "@kdnk.dev/f8n-utils/client";
 import { AuthToken } from "@/utils/supabase/authorization";
 
 export default async function Page() {

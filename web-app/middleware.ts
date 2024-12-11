@@ -1,5 +1,5 @@
 import { type NextRequest } from "next/server";
-import { updateSession } from "@kdnk.dev/f8n-utils";
+import { updateSession } from "@kdnk.dev/f8n-utils/server";
 import {
   authorizedPaths,
   redirectConfig,
