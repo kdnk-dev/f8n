@@ -6,7 +6,7 @@ import {
   FeatureGateCtx,
   FeatureGateCtxProvider,
   getToken,
-} from "@kdnk.dev/f8n-utils";
+} from "@kdnk.dev/f8n-utils/client";
 import { createClient } from "@/utils/supabase/supabaseClient-browser";
 import {Database} from "@/utils/supabase/database";
 import { Session, AuthError } from "@supabase/auth-js";

@@ -1,5 +1,5 @@
 import { createClient } from "@/utils/supabase/supabaseClient-server";
-import { FeatureGateSrv, getToken } from "@kdnk.dev/f8n-utils";
+import { FeatureGateSrv, getToken } from "@kdnk.dev/f8n-utils/client";
 import { AuthToken } from "@/utils/supabase/authorization";
 import React from "react";
 
