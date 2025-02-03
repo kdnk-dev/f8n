@@ -116,7 +116,12 @@ export async function setPassword(
   if (updateResp.error) {
     return {
       lastInvocationStatus: "error",
-      error: { rootError: JSON.stringify(updateResp.error) },
+      error:
+        updateResp.error.code === "same_password"
+          ? {
+              fieldErrors: { password: "Must not re-use previous password." },
+            }
+          : { rootError: JSON.stringify(updateResp.error) },
     };
   } else {
     return { lastInvocationStatus: "success" };
