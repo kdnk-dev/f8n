@@ -27,7 +27,10 @@ export async function loginWithEmailPassword(
     return {
       lastInvocationStatus: "error",
       error: {
-        fieldErrors: { password: "Unknown user or incorrect password" },
+        fieldErrors: {
+          password: "Unknown user or incorrect password",
+          email: "Unknown user or incorrect password",
+        },
       },
     };
   } else {
@@ -53,7 +56,14 @@ export async function loginWithMagicLink(
     ? { lastInvocationStatus: "success" }
     : {
         lastInvocationStatus: "error",
-        error: { rootError: JSON.stringify(error) },
+        error:
+          error.code === "otp_disabled"
+            ? {
+                fieldErrors: {
+                  email: "Unknown user",
+                },
+              }
+            : { rootError: JSON.stringify(error) },
       };
 }
 
