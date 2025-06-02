@@ -16,7 +16,7 @@ const publicUrl = process.env.VERCEL_PROJECT_PRODUCTION_URL
 export async function loginWithEmailPassword(
   loginFormData: KFormData<LoginFormT>,
 ): Promise<KActionState<LoginFormT>> {
-  const supabase = createClient<Database>();
+  const supabase = await createClient<Database>();
 
   const { error } = await supabase.auth.signInWithPassword({
     email: loginFormData.email,
@@ -40,7 +40,7 @@ export async function loginWithEmailPassword(
 export async function loginWithMagicLink(
   loginFormData: KFormData<MagicLinkSignInFormT>,
 ): Promise<KActionState<MagicLinkSignInFormT>> {
-  const client = createClient();
+  const client = await createClient();
   const { error } = await client.auth.signInWithOtp({
     email: loginFormData.email,
     options: {
@@ -67,7 +67,7 @@ export async function signupWithEmail(
     };
   }
 
-  const supabase = createClient<Database>();
+  const supabase = await createClient<Database>();
 
   const { error } = await supabase.auth.signUp({
     email: signupFormData.email,
@@ -93,7 +93,7 @@ export async function signupWithEmail(
 }
 
 export async function signOut() {
-  const supabase = createClient<Database>();
+  const supabase = await createClient<Database>();
   return (await supabase.auth.signOut()).error === null;
 }
 
@@ -107,7 +107,7 @@ export async function setPassword(
     };
   }
 
-  const supabase = createClient();
+  const supabase = await createClient();
 
   const updateResp = await supabase.auth.updateUser({
     password: formData.password,
@@ -131,7 +131,7 @@ export async function setPassword(
 export async function forgotPassword(
   formData: KFormData<ForgotPasswordFormT>,
 ): Promise<KActionState<ForgotPasswordFormT>> {
-  const client = createClient();
+  const client = await createClient();
 
   const response = await client.auth.resetPasswordForEmail(formData.email, {
     redirectTo: `${publicUrl}/password-reset-callback`,

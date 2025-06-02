@@ -8,19 +8,21 @@ import {
   getToken,
 } from "@kdnk.dev/f8n-utils/client";
 import { createClient } from "@/utils/supabase/supabaseClient-browser";
-import {Database} from "@/utils/supabase/database";
+import { Database } from "@/utils/supabase/database";
 import { Session, AuthError } from "@supabase/auth-js";
 
 type GetSessionResponse =
-    { data: { session: Session; }; error: null; } | { data: { session: null; }; error: AuthError; } | { data: { session: null; }; error: null; }
+  | { data: { session: Session }; error: null }
+  | { data: { session: null }; error: AuthError }
+  | { data: { session: null }; error: null };
 
 const authTokenContext: React.Context<AuthToken | null> =
-    React.createContext<AuthToken | null>(null);
+  React.createContext<AuthToken | null>(null);
 
 const authTokenProvider = (setContextFn: (token: AuthToken) => void) => {
-    createClient<Database>()
-        .auth.getSession()
-        .then((value:GetSessionResponse) => getToken<AuthToken>(value))
+  createClient<Database>()
+    .auth.getSession()
+    .then((value: GetSessionResponse) => getToken<AuthToken>(value))
     .then(setContextFn);
 };
 

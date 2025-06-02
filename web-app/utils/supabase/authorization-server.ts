@@ -4,7 +4,7 @@ import { AuthToken } from "@/utils/supabase/authorization";
 import React from "react";
 
 const getAuthTokenSrv = async () => {
-  const supabase = createClient();
+  const supabase = await createClient();
   return getToken<AuthToken>(await supabase.auth.getSession());
 };
 
