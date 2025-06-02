@@ -3,11 +3,11 @@ import { createClient } from "@/utils/supabase/supabaseClient-server";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import SignOutButton from "@/app/(authenticated)/home/signout-button";
-import { getToken } from "@kdnk.dev/f8n-utils/client";
+import { getToken } from "@kdnk.dev/f8n-utils/server";
 import { AuthToken } from "@/utils/supabase/authorization";
 
 export default async function Page() {
-  const client = createClient();
+  const client = await createClient();
   const user = await client.auth.getUser();
   const token = getToken<AuthToken>(await client.auth.getSession());
 

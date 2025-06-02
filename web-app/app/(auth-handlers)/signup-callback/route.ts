@@ -10,7 +10,7 @@ export async function GET(request: Request) {
   const code = requestUrl.searchParams.get("code");
   const origin = requestUrl.origin;
 
-  const client = createClient<Database>();
+  const client = await createClient<Database>();
 
   if (code) {
     await client.auth.exchangeCodeForSession(code);
